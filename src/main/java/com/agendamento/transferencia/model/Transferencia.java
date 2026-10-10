@@ -1,12 +1,12 @@
 package com.agendamento.transferencia.model;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.Column;
+import javax.persistence.Entity;
 import javax.persistence.Table;
 import java.math.BigDecimal;
+import javax.persistence.Id;
 import java.time.LocalDate;
 import java.util.Objects;
 
@@ -39,7 +39,8 @@ public class Transferencia {
     public Transferencia() {
     }
 
-    public Transferencia(Long id, String contaOrigem, String contaDestino, BigDecimal valor, BigDecimal taxa, LocalDate dataAgendamento, LocalDate dataTransferencia) {
+    public Transferencia(Long id, String contaOrigem, String contaDestino, BigDecimal valor, BigDecimal taxa,
+            LocalDate dataAgendamento, LocalDate dataTransferencia) {
         this.id = id;
         this.contaOrigem = contaOrigem;
         this.contaDestino = contaDestino;
@@ -114,8 +115,10 @@ public class Transferencia {
 
     @Override
     public boolean equals(Object objeto) {
-        if (this == objeto) return true;
-        if (objeto == null || getClass() != objeto.getClass()) return false;
+        if (this == objeto)
+            return true;
+        if (objeto == null || getClass() != objeto.getClass())
+            return false;
         Transferencia that = (Transferencia) objeto;
         return Objects.equals(id, that.id);
     }

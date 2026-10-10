@@ -18,7 +18,7 @@ public class TransferenciaRequisicaoDTO {
     private String contaDestino;
 
     @NotNull(message = "O valor da transferência é obrigatório.")
-    @Positive(message = "O valor da transferência deve ser positivo.")
+    @Positive(message = "O valor da transferência não deve ser abaixo de 0.")
     private BigDecimal valor;
 
     @NotNull(message = "A data da transferência é obrigatória.")
@@ -27,7 +27,8 @@ public class TransferenciaRequisicaoDTO {
     public TransferenciaRequisicaoDTO() {
     }
 
-    public TransferenciaRequisicaoDTO(String contaOrigem, String contaDestino, BigDecimal valor, LocalDate dataTransferencia) {
+    public TransferenciaRequisicaoDTO(String contaOrigem, String contaDestino, BigDecimal valor,
+            LocalDate dataTransferencia) {
         this.contaOrigem = contaOrigem;
         this.contaDestino = contaDestino;
         this.valor = valor;
