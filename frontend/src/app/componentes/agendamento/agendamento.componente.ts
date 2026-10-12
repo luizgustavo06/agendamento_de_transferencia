@@ -1,9 +1,18 @@
-import { Component, Output, EventEmitter, OnInit, inject, ChangeDetectorRef } from '@angular/core';
+import { Component, Output, EventEmitter, OnInit, inject, ChangeDetectorRef, ElementRef, HostListener } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { TransferenciaServico } from '../../servicos/transferencia.servico';
 import { NotificacaoAlerta, TransferenciaRequisicao } from '../../modelos/transferencia.modelo';
 import { HttpErrorResponse } from '@angular/common/http';
+
+export interface DiaCalendario {
+  data: Date;
+  diaNumero: number;
+  mesAtual: boolean;
+  selecionado: boolean;
+  hoje: boolean;
+  desabilitado: boolean;
+}
 
 @Component({
   selector: 'app-agendamento',
@@ -16,13 +25,20 @@ export class AgendamentoComponente implements OnInit {
   private construtorFormulario = inject(FormBuilder);
   private servicoTransferencia = inject(TransferenciaServico);
   private cdr = inject(ChangeDetectorRef);
+  private elementoRef = inject(ElementRef);
 
   @Output() notificacaoEmitida = new EventEmitter<NotificacaoAlerta>();
 
   formulario!: FormGroup;
   carregando: boolean = false;
   dataMinima: string = '';
+  dataHojeFormatada: string = '';
   valorExibicao: string = '';
+
+  calendarioAberto: boolean = false;
+  mesExibicao: Date = new Date();
+  diasSemana: string[] = ['Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sáb'];
+  diasCalendario: DiaCalendario[] = [];
 
   previaTaxa: {
     dias: number;
@@ -35,6 +51,7 @@ export class AgendamentoComponente implements OnInit {
   ngOnInit(): void {
     const hoje = new Date();
     this.dataMinima = hoje.toISOString().split('T')[0];
+    this.dataHojeFormatada = hoje.toLocaleDateString('pt-BR');
 
     this.formulario = this.construtorFormulario.group({
       contaOrigem: ['', [Validators.required, Validators.pattern(/^\d{10}$/)]],
@@ -324,5 +341,171 @@ export class AgendamentoComponente implements OnInit {
       return true;
     }
     return /^\d$/.test(tecla);
+  }
+
+  alternarCalendario(evento?: Event): void {
+    if (evento) {
+      evento.stopPropagation();
+    }
+    this.calendarioAberto = !this.calendarioAberto;
+    if (this.calendarioAberto) {
+      const dataAtualValor = this.formulario.get('dataTransferencia')?.value;
+      if (dataAtualValor) {
+        const [ano, mes, dia] = dataAtualValor.split('-').map(Number);
+        this.mesExibicao = new Date(ano, mes - 1, dia);
+      } else {
+        this.mesExibicao = new Date();
+      }
+      this.gerarCalendario();
+    }
+  }
+
+  fecharCalendario(): void {
+    this.calendarioAberto = false;
+    this.cdr.detectChanges();
+  }
+
+  avancarMes(evento?: Event): void {
+    if (evento) {
+      evento.stopPropagation();
+    }
+    this.mesExibicao = new Date(this.mesExibicao.getFullYear(), this.mesExibicao.getMonth() + 1, 1);
+    this.gerarCalendario();
+  }
+
+  voltarMes(evento?: Event): void {
+    if (evento) {
+      evento.stopPropagation();
+    }
+    this.mesExibicao = new Date(this.mesExibicao.getFullYear(), this.mesExibicao.getMonth() - 1, 1);
+    this.gerarCalendario();
+  }
+
+  gerarCalendario(): void {
+    const ano = this.mesExibicao.getFullYear();
+    const mes = this.mesExibicao.getMonth();
+
+    const primeiroDiaSemana = new Date(ano, mes, 1).getDay();
+    const totalDiasMes = new Date(ano, mes + 1, 0).getDate();
+    const totalDiasMesAnterior = new Date(ano, mes, 0).getDate();
+
+    const hoje = new Date();
+    hoje.setHours(0, 0, 0, 0);
+
+    const dataSelecionadaStr = this.formulario.get('dataTransferencia')?.value;
+    let dataSelecionadaIso = '';
+    if (dataSelecionadaStr) {
+      dataSelecionadaIso = dataSelecionadaStr;
+    }
+
+    const dias: DiaCalendario[] = [];
+
+    for (let i = primeiroDiaSemana - 1; i >= 0; i--) {
+      const diaNum = totalDiasMesAnterior - i;
+      const data = new Date(ano, mes - 1, diaNum);
+      data.setHours(0, 0, 0, 0);
+      dias.push({
+        data,
+        diaNumero: diaNum,
+        mesAtual: false,
+        selecionado: false,
+        hoje: false,
+        desabilitado: true
+      });
+    }
+
+    for (let diaNum = 1; diaNum <= totalDiasMes; diaNum++) {
+      const data = new Date(ano, mes, diaNum);
+      data.setHours(0, 0, 0, 0);
+      const iso = `${ano}-${String(mes + 1).padStart(2, '0')}-${String(diaNum).padStart(2, '0')}`;
+      const ehHoje = data.getTime() === hoje.getTime();
+      const ehPassado = data.getTime() < hoje.getTime();
+      const estaSelecionado = iso === dataSelecionadaIso;
+
+      dias.push({
+        data,
+        diaNumero: diaNum,
+        mesAtual: true,
+        selecionado: estaSelecionado,
+        hoje: ehHoje,
+        desabilitado: ehPassado
+      });
+    }
+
+    const restante = 42 - dias.length;
+    for (let diaNum = 1; diaNum <= restante; diaNum++) {
+      const data = new Date(ano, mes + 1, diaNum);
+      data.setHours(0, 0, 0, 0);
+      dias.push({
+        data,
+        diaNumero: diaNum,
+        mesAtual: false,
+        selecionado: false,
+        hoje: false,
+        desabilitado: true
+      });
+    }
+
+    this.diasCalendario = dias;
+    this.cdr.detectChanges();
+  }
+
+  selecionarData(dia: DiaCalendario, evento?: Event): void {
+    if (evento) {
+      evento.stopPropagation();
+    }
+    if (dia.desabilitado) {
+      return;
+    }
+
+    const ano = dia.data.getFullYear();
+    const mes = String(dia.data.getMonth() + 1).padStart(2, '0');
+    const diaNum = String(dia.data.getDate()).padStart(2, '0');
+    const dataIso = `${ano}-${mes}-${diaNum}`;
+
+    this.formulario.get('dataTransferencia')?.setValue(dataIso);
+    this.formulario.get('dataTransferencia')?.markAsDirty();
+    this.fecharCalendario();
+  }
+
+  selecionarDataHoje(evento?: Event): void {
+    if (evento) {
+      evento.stopPropagation();
+    }
+    this.formulario.get('dataTransferencia')?.setValue(this.dataMinima);
+    this.formulario.get('dataTransferencia')?.markAsDirty();
+    this.fecharCalendario();
+  }
+
+  obterRotuloMesAno(): string {
+    const meses = [
+      'Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho',
+      'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'
+    ];
+    return `${meses[this.mesExibicao.getMonth()]} de ${this.mesExibicao.getFullYear()}`;
+  }
+
+  obterDataFormatadaExibicao(): string {
+    const valor = this.formulario.get('dataTransferencia')?.value;
+    if (!valor) return 'Selecione uma data';
+    const partes = valor.split('-');
+    if (partes.length === 3) {
+      return `${partes[2]}/${partes[1]}/${partes[0]}`;
+    }
+    return valor;
+  }
+
+  @HostListener('document:click', ['$event'])
+  aoClicarFora(evento: MouseEvent): void {
+    if (this.calendarioAberto && !this.elementoRef.nativeElement.querySelector('.container-seletor-data')?.contains(evento.target)) {
+      this.fecharCalendario();
+    }
+  }
+
+  @HostListener('document:keydown.escape')
+  aoPressionarEsc(): void {
+    if (this.calendarioAberto) {
+      this.fecharCalendario();
+    }
   }
 }
