@@ -530,3 +530,66 @@
     transform: rotate(360deg);
   }
 }
+
+@media (max-width: 600px) {
+  .cartao-formulario {
+    padding: 18px 16px;
+    border-radius: 14px;
+  }
+
+  .cabecalho-cartao {
+    margin-bottom: 18px;
+    padding-bottom: 12px;
+    gap: 12px;
+  }
+
+  .icone-cabecalho {
+    width: 44px;
+    height: 44px;
+    border-radius: 12px;
+  }
+
+  .icone-cabecalho .material-symbols-outlined {
+    font-size: 24px;
+  }
+
+  .titulo-formulario {
+    font-size: 18px;
+  }
+
+  .subtitulo-formulario {
+    font-size: 12px;
+  }
+
+  .painel-calendario-popup {
+    min-width: 0;
+    width: 100%;
+    left: 0;
+    right: 0;
+    padding: 10px;
+    border-radius: 12px;
+  }
+
+  .celula-dia {
+    height: 36px;
+  }
+
+  .painel-previa {
+    padding: 12px 14px;
+    margin-bottom: 18px;
+    border-radius: 10px;
+  }
+
+  .linha-previa {
+    font-size: 12px;
+  }
+
+  .destaque-total {
+    font-size: 15px;
+  }
+
+  .botao-agendar {
+    padding: 13px;
+    font-size: 14px;
+  }
+}

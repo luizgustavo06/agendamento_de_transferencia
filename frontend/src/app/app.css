@@ -5,7 +5,6 @@
   background-color: #f1f5f9;
 }
 
-/* Barra de Navegação */
 .barra-navegacao {
   background: #0f172a;
   color: #ffffff;
@@ -19,6 +18,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+  gap: 16px;
 }
 
 .logotipo-marca {
@@ -36,6 +36,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  flex-shrink: 0;
 }
 
 .simbolo-logo-icone {
@@ -63,6 +64,7 @@
   padding: 8px 16px;
   border-radius: 20px;
   border: 1px solid rgba(255, 255, 255, 0.06);
+  flex-shrink: 0;
 }
 
 .icone-data {
@@ -75,7 +77,6 @@
   font-weight: 500;
 }
 
-/* Conteúdo Principal */
 .conteudo-principal {
   flex: 1;
   max-width: 1300px;
@@ -85,18 +86,11 @@
   box-sizing: border-box;
 }
 
-/* Grade de Layout */
 .grade-aplicacao {
   display: grid;
   grid-template-columns: 460px 1fr;
   gap: 28px;
   align-items: start;
-}
-
-@media (max-width: 1024px) {
-  .grade-aplicacao {
-    grid-template-columns: 1fr;
-  }
 }
 
 .coluna-formulario {
@@ -105,7 +99,10 @@
   gap: 24px;
 }
 
-/* Cartão de Regras de Taxas */
+.coluna-extrato {
+  min-width: 0;
+}
+
 .cartao-regras-taxas {
   background: #ffffff;
   border-radius: 16px;
@@ -133,6 +130,11 @@
   color: #1e293b;
 }
 
+.conteiner-tabela-regras {
+  width: 100%;
+  overflow-x: auto;
+}
+
 .tabela-regras {
   width: 100%;
   border-collapse: collapse;
@@ -146,12 +148,14 @@
   padding: 8px 10px;
   border-bottom: 1px solid #e2e8f0;
   font-weight: 600;
+  white-space: nowrap;
 }
 
 .tabela-regras td {
   padding: 8px 10px;
   border-bottom: 1px solid #f1f5f9;
   color: #334155;
+  white-space: nowrap;
 }
 
 .nota-regras {
@@ -161,7 +165,6 @@
   font-style: italic;
 }
 
-/* Rodapé */
 .rodape-aplicacao {
   background: #ffffff;
   border-top: 1px solid #e2e8f0;
@@ -170,4 +173,72 @@
   font-size: 12px;
   color: #64748b;
   margin-top: 40px;
+}
+
+@media (max-width: 1024px) {
+  .grade-aplicacao {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+}
+
+@media (max-width: 640px) {
+  .barra-navegacao {
+    padding: 12px 16px;
+  }
+
+  .conteudo-navegacao {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
+
+  .simbolo-logo {
+    width: 38px;
+    height: 38px;
+    border-radius: 10px;
+  }
+
+  .simbolo-logo-icone {
+    font-size: 22px;
+  }
+
+  .nome-sistema {
+    font-size: 17px;
+  }
+
+  .subtitulo-sistema {
+    font-size: 11px;
+  }
+
+  .data-sistema {
+    padding: 6px 12px;
+    font-size: 12px;
+  }
+
+  .conteudo-principal {
+    margin: 16px auto;
+    padding: 0 12px;
+  }
+
+  .coluna-formulario {
+    gap: 16px;
+  }
+
+  .cartao-regras-taxas {
+    padding: 16px;
+    border-radius: 12px;
+  }
+
+  .tabela-regras th,
+  .tabela-regras td {
+    padding: 6px 8px;
+    font-size: 11px;
+  }
+
+  .rodape-aplicacao {
+    margin-top: 24px;
+    padding: 14px 12px;
+    font-size: 11px;
+  }
 }

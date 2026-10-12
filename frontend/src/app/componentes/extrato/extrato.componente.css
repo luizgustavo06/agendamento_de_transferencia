@@ -32,6 +32,7 @@
   justify-content: center;
   background: #f0fdf4;
   border-radius: 14px;
+  flex-shrink: 0;
 }
 
 .titulo-extrato {
@@ -60,6 +61,7 @@
   align-items: center;
   gap: 6px;
   transition: all 0.2s ease;
+  flex-shrink: 0;
 }
 
 .botao-atualizar:hover:not(:disabled) {
@@ -78,18 +80,11 @@
   }
 }
 
-/* Grade de Métricas */
 .grade-metricas {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 12px;
   margin-bottom: 20px;
-}
-
-@media (max-width: 768px) {
-  .grade-metricas {
-    grid-template-columns: 1fr;
-  }
 }
 
 .item-metrica {
@@ -123,11 +118,29 @@
   color: #ea580c;
 }
 
-/* Tabela */
 .conteiner-tabela {
   overflow-x: auto;
   border-radius: 12px;
   border: 1px solid #e2e8f0;
+  -webkit-overflow-scrolling: touch;
+}
+
+.conteiner-tabela::-webkit-scrollbar {
+  height: 6px;
+}
+
+.conteiner-tabela::-webkit-scrollbar-track {
+  background: #f1f5f9;
+  border-radius: 6px;
+}
+
+.conteiner-tabela::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+  border-radius: 6px;
+}
+
+.conteiner-tabela::-webkit-scrollbar-thumb:hover {
+  background: #94a3b8;
 }
 
 .tabela-transferencias {
@@ -198,8 +211,8 @@
   font-weight: 600;
 }
 
-/* Estados */
-.estado-carregando, .estado-vazio {
+.estado-carregando,
+.estado-vazio {
   text-align: center;
   padding: 48px 20px;
 }
@@ -229,4 +242,69 @@
   margin: 0;
   font-size: 13px;
   color: #64748b;
+}
+
+@media (max-width: 768px) {
+  .grade-metricas {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .grade-metricas .item-metrica:last-child {
+    grid-column: span 2;
+  }
+}
+
+@media (max-width: 640px) {
+  .cartao-extrato {
+    padding: 18px 16px;
+    border-radius: 14px;
+  }
+
+  .cabecalho-extrato {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 14px;
+    margin-bottom: 16px;
+    padding-bottom: 14px;
+  }
+
+  .botao-atualizar {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .icone-cabecalho {
+    width: 44px;
+    height: 44px;
+    border-radius: 12px;
+  }
+
+  .titulo-extrato {
+    font-size: 18px;
+  }
+
+  .subtitulo-extrato {
+    font-size: 12px;
+  }
+
+  .tabela-transferencias th,
+  .tabela-transferencias td {
+    padding: 10px 12px;
+    font-size: 12px;
+  }
+
+  .estado-carregando,
+  .estado-vazio {
+    padding: 32px 14px;
+  }
+}
+
+@media (max-width: 480px) {
+  .grade-metricas {
+    grid-template-columns: 1fr;
+  }
+
+  .grade-metricas .item-metrica:last-child {
+    grid-column: span 1;
+  }
 }

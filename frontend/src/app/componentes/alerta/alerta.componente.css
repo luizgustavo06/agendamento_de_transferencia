@@ -81,7 +81,6 @@
   opacity: 1;
 }
 
-/* Sucesso (Verde) */
 .alerta-sucesso {
   background-color: #ecfdf5;
   border-left: 5px solid #10b981;
@@ -97,7 +96,6 @@
   color: #065f46;
 }
 
-/* Aviso (Amarelo / Laranja) */
 .alerta-aviso {
   background-color: #fffbeb;
   border-left: 5px solid #f59e0b;
@@ -113,7 +111,6 @@
   color: #92400e;
 }
 
-/* Erro (Vermelho) */
 .alerta-erro {
   background-color: #fef2f2;
   border-left: 5px solid #ef4444;
@@ -129,7 +126,6 @@
   color: #991b1b;
 }
 
-/* Info (Azul) */
 .alerta-info {
   background-color: #eff6ff;
   border-left: 5px solid #3b82f6;
@@ -143,4 +139,34 @@
 
 .alerta-info .botao-fechar {
   color: #1e40af;
+}
+
+@media (max-width: 600px) {
+  .caixa-alerta {
+    padding: 12px 14px;
+    gap: 10px;
+    margin-bottom: 16px;
+    border-radius: 10px;
+  }
+
+  .icone-alerta {
+    width: 28px;
+    height: 28px;
+  }
+
+  .icone-alerta .material-symbols-outlined {
+    font-size: 18px;
+  }
+
+  .titulo-alerta {
+    font-size: 14px;
+  }
+
+  .mensagem-alerta {
+    font-size: 13px;
+  }
+
+  .lista-detalhes {
+    font-size: 12px;
+  }
 }

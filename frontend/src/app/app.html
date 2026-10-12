@@ -1,5 +1,4 @@
 <div class="aplicacao-conteiner">
-  <!-- Barra de Navegação Superior -->
   <header class="barra-navegacao">
     <div class="conteudo-navegacao">
       <div class="logotipo-marca">
@@ -20,69 +19,66 @@
   </header>
 
   <main class="conteudo-principal">
-    <!-- Componente de Alertas / Notificações -->
     <app-alerta [alerta]="notificacaoAtual" (fechar)="limparNotificacao()"></app-alerta>
 
-    <!-- Grade Principal da Aplicação -->
     <div class="grade-aplicacao">
-      <!-- Coluna da Esquerda: Formulário e Tabela de Regras -->
       <section class="coluna-formulario">
         <app-agendamento (notificacaoEmitida)="receberNotificacao($event)"></app-agendamento>
 
-        <!-- Tabela Informativa de Taxas -->
         <div class="cartao-regras-taxas">
           <div class="cabecalho-regras">
             <span class="material-symbols-outlined icone-regras">info</span>
             <h3 class="titulo-regras">Tabela Oficial de Taxas</h3>
           </div>
-          <table class="tabela-regras">
-            <thead>
-              <tr>
-                <th>Dias Transferência</th>
-                <th>Valor Fixo</th>
-                <th>Taxa %</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>0 dia (Hoje)</td>
-                <td>R$ 3,00</td>
-                <td>2,5%</td>
-              </tr>
-              <tr>
-                <td>1 a 10 dias</td>
-                <td>R$ 12,00</td>
-                <td>0,0%</td>
-              </tr>
-              <tr>
-                <td>11 a 20 dias</td>
-                <td>R$ 0,00</td>
-                <td>8,2%</td>
-              </tr>
-              <tr>
-                <td>21 a 30 dias</td>
-                <td>R$ 0,00</td>
-                <td>6,9%</td>
-              </tr>
-              <tr>
-                <td>31 a 40 dias</td>
-                <td>R$ 0,00</td>
-                <td>4,7%</td>
-              </tr>
-              <tr>
-                <td>41 a 50 dias</td>
-                <td>R$ 0,00</td>
-                <td>1,7%</td>
-              </tr>
-            </tbody>
-          </table>
+          <div class="conteiner-tabela-regras">
+            <table class="tabela-regras">
+              <thead>
+                <tr>
+                  <th>Dias Transferência</th>
+                  <th>Valor Fixo</th>
+                  <th>Taxa %</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>0 dia (Hoje)</td>
+                  <td>R$ 3,00</td>
+                  <td>2,5%</td>
+                </tr>
+                <tr>
+                  <td>1 a 10 dias</td>
+                  <td>R$ 12,00</td>
+                  <td>0,0%</td>
+                </tr>
+                <tr>
+                  <td>11 a 20 dias</td>
+                  <td>R$ 0,00</td>
+                  <td>8,2%</td>
+                </tr>
+                <tr>
+                  <td>21 a 30 dias</td>
+                  <td>R$ 0,00</td>
+                  <td>6,9%</td>
+                </tr>
+                <tr>
+                  <td>31 a 40 dias</td>
+                  <td>R$ 0,00</td>
+                  <td>4,7%</td>
+                </tr>
+                <tr>
+                  <td>41 a 50 dias</td>
+                  <td>R$ 0,00</td>
+                  <td>1,7%</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
           <p class="nota-regras">
             * Acima de 50 dias ou data no passado: não há taxa aplicável (transferência bloqueada).
           </p>
         </div>
       </section>
 
-      <!-- Coluna da Direita: Extrato -->
       <section class="coluna-extrato">
         <app-extrato (notificacaoEmitida)="receberNotificacao($event)"></app-extrato>
       </section>

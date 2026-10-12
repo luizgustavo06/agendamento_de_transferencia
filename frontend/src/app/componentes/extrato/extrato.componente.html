@@ -15,7 +15,6 @@
     </button>
   </div>
 
-  <!-- Métricas Rápidas -->
   <div class="grade-metricas" *ngIf="transferencias.length > 0">
     <div class="item-metrica">
       <span class="rotulo-metrica">Total Agendamentos</span>
@@ -31,13 +30,11 @@
     </div>
   </div>
 
-  <!-- Estado de Carregamento -->
   <div *ngIf="carregando && transferencias.length === 0" class="estado-carregando">
     <div class="spinner-grande"></div>
     <p>Carregando extrato de transferências...</p>
   </div>
 
-  <!-- Tabela de Dados -->
   <div class="conteiner-tabela" *ngIf="!carregando || transferencias.length > 0">
     <table class="tabela-transferencias" *ngIf="transferencias.length > 0">
       <thead>
@@ -74,7 +71,6 @@
       </tbody>
     </table>
 
-    <!-- Estado Vazio -->
     <div *ngIf="transferencias.length === 0 && !carregando" class="estado-vazio">
       <div class="icone-vazio">
         <span class="material-symbols-outlined icone-vazio-simbolo">inbox</span>
