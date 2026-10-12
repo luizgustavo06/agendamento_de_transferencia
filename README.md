@@ -43,8 +43,7 @@ sistema-agendamento-transferencias/
 │   ├── src/app/...               # Componentes, Modelos e Serviços Angular
 │   ├── package.json              # Dependências e scripts do Node.js
 │   └── angular.json              # Configurações do framework Angular
-├── iniciar.bat                   # Script de inicialização rápida (Windows)
-├── iniciar.sh                    # Script de inicialização rápida (Linux/macOS)
+├── iniciar.bat                   # Script de inicialização rápida
 ├── .gitignore                    # Regras unificadas de exclusão (target/, node_modules/, etc.)
 └── README.md                     # Documentação completa do projeto
 ```
@@ -110,45 +109,34 @@ A classe `ManipuladorExcecoesGlobal` intercepta falhas e retorna payloads estrut
 
 ### Inicialização Rápida (Recomendado)
 
-Para comodidade do avaliador, o repositório disponibiliza scripts automáticos na raiz que iniciam tanto o backend quanto o frontend simultaneamente:
+Para comodidade do avaliador, o repositório disponibiliza um script automático na raiz que inicia tanto o backend quanto o frontend simultaneamente:
 
-* **No Windows:**
-  Dê um duplo clique em `iniciar.bat` (ou execute via terminal `.\iniciar.bat`). O script:
-  * valida se Java e Node.js estão instalados e se as portas 8080 e 4200 estão livres;
-  * executa `npm install` automaticamente na primeira execução;
-  * abre o Windows Terminal com duas guias (Backend + H2 e Frontend);
-  * aguarda os serviços responderem e abre `http://localhost:4200` no navegador.
+Dê um duplo clique em `iniciar.bat` (ou execute via terminal `.\iniciar.bat`). O script:
+* valida se Java e Node.js estão instalados e se as portas 8080 e 4200 estão livres;
+* executa `npm install` automaticamente na primeira execução;
+* abre o Windows Terminal com duas guias (Backend + H2 e Frontend);
+* aguarda os serviços responderem e abre `http://localhost:4200` no navegador.
 
-  Para abrir em janelas separadas do CMD em vez de guias: `.\iniciar.bat janelas`.
-* **No Linux / macOS:**
-  Execute `./iniciar.sh` (conceda permissão de execução com `chmod +x iniciar.sh` caso necessário).
+Para abrir em janelas separadas do Prompt de Comando (CMD) em vez de guias do Windows Terminal:
+```cmd
+.\iniciar.bat janelas
+```
 
 ---
 
 ### Executando o Backend Manualmente (Spring Boot)
 
-1. Abra o terminal na pasta raiz do repositório clonado:
-
+1. Abra o terminal na pasta raiz do repositório clonado.
 
 2. Execute os testes automatizados para validar a compilação:
-   * **Linux/macOS:**
-     ```bash
-     ./mvnw test
-     ```
-   * **Windows:**
-     ```bash
-     .\mvnw.cmd test
-     ```
+   ```cmd
+   .\mvnw.cmd test
+   ```
 
 3. Inicie o servidor da aplicação:
-   * **Linux/macOS:**
-     ```bash
-     ./mvnw spring-boot:run
-     ```
-   * **Windows:**
-     ```bash
-     .\mvnw.cmd spring-boot:run
-     ```
+   ```cmd
+   .\mvnw.cmd spring-boot:run
+   ```
 
 O backend estará ativo em: **`http://localhost:8080`**
 
