@@ -1,0 +1,136 @@
+<div class="cartao-formulario">
+  <div class="cabecalho-cartao">
+    <div class="icone-cabecalho">
+      <span class="material-symbols-outlined icone-simbolo">payments</span>
+    </div>
+    <div>
+      <h2 class="titulo-formulario">Novo Agendamento</h2>
+      <p class="subtitulo-formulario">Preencha os dados da transferência financeira</p>
+    </div>
+  </div>
+
+  <form [formGroup]="formulario" (ngSubmit)="submeterAgendamento()" novalidate>
+    <div class="grupo-campo">
+      <label for="contaOrigem" class="rotulo-campo">Conta de Origem</label>
+      <div class="campo-com-icone">
+        <input
+          id="contaOrigem"
+          type="text"
+          formControlName="contaOrigem"
+          maxlength="10"
+          placeholder="Ex: 0123456789 (10 dígitos)"
+          class="entrada-texto"
+          [class.entrada-invalida]="formulario.get('contaOrigem')?.invalid && formulario.get('contaOrigem')?.touched"
+          (keypress)="apenasNumeros($event)"
+        />
+        <span class="contador-caracteres">{{ formulario.get('contaOrigem')?.value?.length || 0 }}/10</span>
+      </div>
+      <div *ngIf="formulario.get('contaOrigem')?.invalid && formulario.get('contaOrigem')?.touched" class="mensagem-erro-campo">
+        <small *ngIf="formulario.get('contaOrigem')?.errors?.['required']">A conta de origem é obrigatória.</small>
+        <small *ngIf="formulario.get('contaOrigem')?.errors?.['pattern']">A conta deve conter exatamente 10 dígitos numéricos.</small>
+      </div>
+    </div>
+
+    <div class="grupo-campo">
+      <label for="contaDestino" class="rotulo-campo">Conta de Destino</label>
+      <div class="campo-com-icone">
+        <input
+          id="contaDestino"
+          type="text"
+          formControlName="contaDestino"
+          maxlength="10"
+          placeholder="Ex: 9876543210 (10 dígitos)"
+          class="entrada-texto"
+          [class.entrada-invalida]="formulario.get('contaDestino')?.invalid && formulario.get('contaDestino')?.touched"
+          (keypress)="apenasNumeros($event)"
+        />
+        <span class="contador-caracteres">{{ formulario.get('contaDestino')?.value?.length || 0 }}/10</span>
+      </div>
+      <div *ngIf="formulario.get('contaDestino')?.invalid && formulario.get('contaDestino')?.touched" class="mensagem-erro-campo">
+        <small *ngIf="formulario.get('contaDestino')?.errors?.['required']">A conta de destino é obrigatória.</small>
+        <small *ngIf="formulario.get('contaDestino')?.errors?.['pattern']">A conta deve conter exatamente 10 dígitos numéricos.</small>
+      </div>
+      <div *ngIf="formulario.errors?.['contasIguais'] && (formulario.get('contaDestino')?.touched || formulario.get('contaOrigem')?.touched)" class="mensagem-erro-campo">
+        <small>A conta de destino deve ser diferente da conta de origem.</small>
+      </div>
+    </div>
+
+    <div class="grade-dupla">
+      <div class="grupo-campo">
+        <label for="valor" class="rotulo-campo">Valor da Transferência</label>
+        <div class="campo-moeda">
+          <span class="simbolo-moeda">R$</span>
+          <input
+            id="valor"
+            type="text"
+            inputmode="decimal"
+            [value]="valorExibicao"
+            (input)="aoDigitarMoeda($event)"
+            (blur)="aoSairDoCampoMoeda()"
+            placeholder="0,00"
+            class="entrada-texto entrada-com-prefixo"
+            [class.entrada-invalida]="formulario.get('valor')?.invalid && formulario.get('valor')?.touched"
+          />
+        </div>
+        <div *ngIf="formulario.get('valor')?.invalid && formulario.get('valor')?.touched" class="mensagem-erro-campo">
+          <small *ngIf="formulario.get('valor')?.errors?.['required']">O valor é obrigatório.</small>
+          <small *ngIf="formulario.get('valor')?.errors?.['min']">O valor deve ser maior que zero.</small>
+        </div>
+      </div>
+
+      <div class="grupo-campo">
+        <label for="dataTransferencia" class="rotulo-campo">Data da Transferência</label>
+        <input
+          id="dataTransferencia"
+          type="date"
+          [min]="dataMinima"
+          formControlName="dataTransferencia"
+          class="entrada-texto"
+          [class.entrada-invalida]="formulario.get('dataTransferencia')?.invalid && formulario.get('dataTransferencia')?.touched"
+        />
+        <div *ngIf="formulario.get('dataTransferencia')?.invalid && formulario.get('dataTransferencia')?.touched" class="mensagem-erro-campo">
+          <small *ngIf="formulario.get('dataTransferencia')?.errors?.['required']">A data é obrigatória.</small>
+        </div>
+      </div>
+    </div>
+
+    <!-- Card de Prévia em Tempo Real -->
+    <div *ngIf="previaTaxa" class="painel-previa" [class.previa-alerta]="!previaTaxa.aplicavel">
+      <div class="cabecalho-previa">
+        <span class="rotulo-previa">Cálculo Estimado da Taxa</span>
+        <span class="badge-dias">{{ previaTaxa.dias }} {{ previaTaxa.dias === 1 ? 'dia' : 'dias' }} de antecedência</span>
+      </div>
+
+      <div *ngIf="previaTaxa.aplicavel" class="conteudo-previa">
+        <div class="linha-previa">
+          <span>Regra Aplicada:</span>
+          <strong>{{ previaTaxa.mensagemTaxa }}</strong>
+        </div>
+        <div class="linha-previa">
+          <span>Taxa Estimada:</span>
+          <strong class="destaque-taxa">R$ {{ previaTaxa.taxaEstimada | number:'1.2-2' }}</strong>
+        </div>
+        <div class="linha-previa linha-total">
+          <span>Valor Total (com taxa):</span>
+          <strong class="destaque-total">R$ {{ previaTaxa.valorTotalEstimado | number:'1.2-2' }}</strong>
+        </div>
+      </div>
+
+      <div *ngIf="!previaTaxa.aplicavel" class="aviso-bloqueio">
+        <span class="material-symbols-outlined icone-aviso-inline">warning</span>
+        <span>{{ previaTaxa.mensagemTaxa }}</span>
+      </div>
+    </div>
+
+    <button
+      type="submit"
+      class="botao-agendar"
+      [disabled]="carregando || formulario.invalid || (previaTaxa && !previaTaxa.aplicavel)"
+    >
+      <span *ngIf="!carregando">Confirmar Agendamento</span>
+      <span *ngIf="carregando" class="indicador-carregamento">
+        <span class="circulo-giratorio"></span> Processando...
+      </span>
+    </button>
+  </form>
+</div>

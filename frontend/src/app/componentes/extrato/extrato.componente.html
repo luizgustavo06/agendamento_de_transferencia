@@ -1,0 +1,86 @@
+<div class="cartao-extrato">
+  <div class="cabecalho-extrato">
+    <div class="titulo-area">
+      <div class="icone-cabecalho">
+        <span class="material-symbols-outlined icone-simbolo">receipt_long</span>
+      </div>
+      <div>
+        <h2 class="titulo-extrato">Extrato de Transferências</h2>
+        <p class="subtitulo-extrato">Histórico de todos os agendamentos registrados</p>
+      </div>
+    </div>
+
+    <button type="button" class="botao-atualizar" (click)="carregarTransferencias()" [disabled]="carregando" title="Atualizar dados">
+      <span class="material-symbols-outlined icone-atualizar-simbolo" [class.girando]="carregando">refresh</span> Atualizar
+    </button>
+  </div>
+
+  <!-- Métricas Rápidas -->
+  <div class="grade-metricas" *ngIf="transferencias.length > 0">
+    <div class="item-metrica">
+      <span class="rotulo-metrica">Total Agendamentos</span>
+      <strong class="valor-metrica">{{ transferencias.length }}</strong>
+    </div>
+    <div class="item-metrica">
+      <span class="rotulo-metrica">Valor Transferido</span>
+      <strong class="valor-metrica valor-positivo">R$ {{ totalValorTransferido | number:'1.2-2' }}</strong>
+    </div>
+    <div class="item-metrica">
+      <span class="rotulo-metrica">Taxas Aplicadas</span>
+      <strong class="valor-metrica valor-taxa">R$ {{ totalTaxas | number:'1.2-2' }}</strong>
+    </div>
+  </div>
+
+  <!-- Estado de Carregamento -->
+  <div *ngIf="carregando && transferencias.length === 0" class="estado-carregando">
+    <div class="spinner-grande"></div>
+    <p>Carregando extrato de transferências...</p>
+  </div>
+
+  <!-- Tabela de Dados -->
+  <div class="conteiner-tabela" *ngIf="!carregando || transferencias.length > 0">
+    <table class="tabela-transferencias" *ngIf="transferencias.length > 0">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Conta Origem</th>
+          <th>Conta Destino</th>
+          <th>Valor</th>
+          <th>Taxa</th>
+          <th>Data Agendamento</th>
+          <th>Data Transferência</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let item of transferencias">
+          <td class="coluna-id">#{{ item.id }}</td>
+          <td>
+            <span class="badge-conta">{{ item.contaOrigem }}</span>
+          </td>
+          <td>
+            <span class="badge-conta">{{ item.contaDestino }}</span>
+          </td>
+          <td class="coluna-valor">
+            <strong>R$ {{ item.valor | number:'1.2-2' }}</strong>
+          </td>
+          <td>
+            <span class="badge-taxa">R$ {{ item.taxa | number:'1.2-2' }}</span>
+          </td>
+          <td class="coluna-data">{{ formatarData(item.dataAgendamento) }}</td>
+          <td class="coluna-data">
+            <span class="destaque-data">{{ formatarData(item.dataTransferencia) }}</span>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+    <!-- Estado Vazio -->
+    <div *ngIf="transferencias.length === 0 && !carregando" class="estado-vazio">
+      <div class="icone-vazio">
+        <span class="material-symbols-outlined icone-vazio-simbolo">inbox</span>
+      </div>
+      <h3 class="titulo-vazio">Nenhum agendamento encontrado</h3>
+      <p class="mensagem-vazio">Utilize o formulário ao lado para realizar o primeiro agendamento financeiro.</p>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,232 @@
+.cartao-extrato {
+  background: #ffffff;
+  border-radius: 16px;
+  padding: 28px;
+  box-shadow: 0 10px 30px rgba(15, 23, 42, 0.08);
+  border: 1px solid #e2e8f0;
+  display: flex;
+  flex-direction: column;
+}
+
+.cabecalho-extrato {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 20px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid #f1f5f9;
+}
+
+.titulo-area {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.icone-cabecalho {
+  font-size: 26px;
+  width: 52px;
+  height: 52px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #f0fdf4;
+  border-radius: 14px;
+}
+
+.titulo-extrato {
+  margin: 0;
+  font-size: 20px;
+  font-weight: 700;
+  color: #0f172a;
+}
+
+.subtitulo-extrato {
+  margin: 4px 0 0 0;
+  font-size: 13px;
+  color: #64748b;
+}
+
+.botao-atualizar {
+  background: #f8fafc;
+  border: 1.5px solid #cbd5e1;
+  color: #334155;
+  padding: 8px 16px;
+  border-radius: 10px;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  transition: all 0.2s ease;
+}
+
+.botao-atualizar:hover:not(:disabled) {
+  background: #f1f5f9;
+  border-color: #94a3b8;
+}
+
+.girando {
+  display: inline-block;
+  animation: girar 1s linear infinite;
+}
+
+@keyframes girar {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Grade de Métricas */
+.grade-metricas {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+@media (max-width: 768px) {
+  .grade-metricas {
+    grid-template-columns: 1fr;
+  }
+}
+
+.item-metrica {
+  background: #f8fafc;
+  padding: 14px 18px;
+  border-radius: 12px;
+  border: 1px solid #e2e8f0;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.rotulo-metrica {
+  font-size: 11px;
+  text-transform: uppercase;
+  color: #64748b;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+}
+
+.valor-metrica {
+  font-size: 18px;
+  color: #0f172a;
+}
+
+.valor-positivo {
+  color: #0284c7;
+}
+
+.valor-taxa {
+  color: #ea580c;
+}
+
+/* Tabela */
+.conteiner-tabela {
+  overflow-x: auto;
+  border-radius: 12px;
+  border: 1px solid #e2e8f0;
+}
+
+.tabela-transferencias {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+  font-size: 13px;
+}
+
+.tabela-transferencias th {
+  background: #f8fafc;
+  color: #475569;
+  font-weight: 700;
+  padding: 14px 16px;
+  border-bottom: 1.5px solid #e2e8f0;
+  white-space: nowrap;
+}
+
+.tabela-transferencias td {
+  padding: 14px 16px;
+  border-bottom: 1px solid #f1f5f9;
+  color: #1e293b;
+  vertical-align: middle;
+}
+
+.tabela-transferencias tr:hover {
+  background-color: #f8fafc;
+}
+
+.coluna-id {
+  font-weight: 600;
+  color: #64748b;
+  width: 60px;
+}
+
+.badge-conta {
+  font-family: monospace;
+  background: #f1f5f9;
+  padding: 4px 8px;
+  border-radius: 6px;
+  color: #334155;
+  font-size: 13px;
+  border: 1px solid #e2e8f0;
+}
+
+.coluna-valor strong {
+  color: #0f172a;
+  font-size: 14px;
+}
+
+.badge-taxa {
+  background: #fff7ed;
+  color: #c2410c;
+  border: 1px solid #ffedd5;
+  padding: 4px 8px;
+  border-radius: 6px;
+  font-weight: 600;
+  font-size: 12px;
+}
+
+.coluna-data {
+  color: #64748b;
+  white-space: nowrap;
+}
+
+.destaque-data {
+  color: #0f172a;
+  font-weight: 600;
+}
+
+/* Estados */
+.estado-carregando, .estado-vazio {
+  text-align: center;
+  padding: 48px 20px;
+}
+
+.spinner-grande {
+  width: 36px;
+  height: 36px;
+  border: 3px solid #e2e8f0;
+  border-top-color: #2563eb;
+  border-radius: 50%;
+  animation: girar 0.8s linear infinite;
+  margin: 0 auto 16px auto;
+}
+
+.icone-vazio {
+  font-size: 40px;
+  margin-bottom: 12px;
+}
+
+.titulo-vazio {
+  margin: 0 0 6px 0;
+  font-size: 16px;
+  color: #1e293b;
+}
+
+.mensagem-vazio {
+  margin: 0;
+  font-size: 13px;
+  color: #64748b;
+}

@@ -1,0 +1,146 @@
+.caixa-alerta {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  padding: 16px 20px;
+  border-radius: 12px;
+  margin-bottom: 24px;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.06);
+  animation: deslizarAbaixo 0.3s ease-out;
+}
+
+@keyframes deslizarAbaixo {
+  from {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.icone-alerta {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.icone-alerta .material-symbols-outlined {
+  font-size: 20px;
+}
+
+.conteudo-alerta {
+  flex: 1;
+}
+
+.titulo-alerta {
+  margin: 0 0 4px 0;
+  font-size: 15px;
+  font-weight: 600;
+}
+
+.mensagem-alerta {
+  margin: 0;
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.lista-detalhes {
+  margin: 8px 0 0 16px;
+  padding: 0;
+  font-size: 13px;
+}
+
+.lista-detalhes li {
+  margin-bottom: 4px;
+}
+
+.botao-fechar {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 4px;
+  line-height: 1;
+  opacity: 0.6;
+  transition: opacity 0.2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.botao-fechar .material-symbols-outlined {
+  font-size: 20px;
+}
+
+.botao-fechar:hover {
+  opacity: 1;
+}
+
+/* Sucesso (Verde) */
+.alerta-sucesso {
+  background-color: #ecfdf5;
+  border-left: 5px solid #10b981;
+  color: #065f46;
+}
+
+.alerta-sucesso .icone-alerta {
+  background-color: #10b981;
+  color: #ffffff;
+}
+
+.alerta-sucesso .botao-fechar {
+  color: #065f46;
+}
+
+/* Aviso (Amarelo / Laranja) */
+.alerta-aviso {
+  background-color: #fffbeb;
+  border-left: 5px solid #f59e0b;
+  color: #92400e;
+}
+
+.alerta-aviso .icone-alerta {
+  background-color: #f59e0b;
+  color: #ffffff;
+}
+
+.alerta-aviso .botao-fechar {
+  color: #92400e;
+}
+
+/* Erro (Vermelho) */
+.alerta-erro {
+  background-color: #fef2f2;
+  border-left: 5px solid #ef4444;
+  color: #991b1b;
+}
+
+.alerta-erro .icone-alerta {
+  background-color: #ef4444;
+  color: #ffffff;
+}
+
+.alerta-erro .botao-fechar {
+  color: #991b1b;
+}
+
+/* Info (Azul) */
+.alerta-info {
+  background-color: #eff6ff;
+  border-left: 5px solid #3b82f6;
+  color: #1e40af;
+}
+
+.alerta-info .icone-alerta {
+  background-color: #3b82f6;
+  color: #ffffff;
+}
+
+.alerta-info .botao-fechar {
+  color: #1e40af;
+}

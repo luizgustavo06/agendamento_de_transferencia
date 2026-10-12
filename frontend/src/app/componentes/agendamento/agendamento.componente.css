@@ -1,0 +1,266 @@
+.cartao-formulario {
+  background: #ffffff;
+  border-radius: 16px;
+  padding: 28px;
+  box-shadow: 0 10px 30px rgba(15, 23, 42, 0.08);
+  border: 1px solid #e2e8f0;
+}
+
+.cabecalho-cartao {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 24px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid #f1f5f9;
+}
+
+.icone-cabecalho {
+  width: 52px;
+  height: 52px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #eff6ff;
+  border-radius: 14px;
+  color: #2563eb;
+}
+
+.icone-cabecalho .material-symbols-outlined {
+  font-size: 28px;
+}
+
+.titulo-formulario {
+  margin: 0;
+  font-size: 20px;
+  font-weight: 700;
+  color: #0f172a;
+}
+
+.subtitulo-formulario {
+  margin: 4px 0 0 0;
+  font-size: 13px;
+  color: #64748b;
+}
+
+.grupo-campo {
+  margin-bottom: 18px;
+}
+
+.rotulo-campo {
+  display: block;
+  font-size: 13px;
+  font-weight: 600;
+  color: #334155;
+  margin-bottom: 6px;
+}
+
+.campo-com-icone {
+  position: relative;
+}
+
+.entrada-texto {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 12px 14px;
+  border: 1.5px solid #cbd5e1;
+  border-radius: 10px;
+  font-size: 14px;
+  color: #0f172a;
+  background-color: #f8fafc;
+  transition: all 0.2s ease;
+}
+
+.entrada-texto:focus {
+  outline: none;
+  border-color: #2563eb;
+  background-color: #ffffff;
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15);
+}
+
+.entrada-invalida {
+  border-color: #ef4444 !important;
+  background-color: #fef2f2 !important;
+}
+
+.contador-caracteres {
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 11px;
+  color: #94a3b8;
+  font-weight: 500;
+}
+
+.campo-moeda {
+  position: relative;
+}
+
+.simbolo-moeda {
+  position: absolute;
+  left: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 14px;
+  font-weight: 600;
+  color: #64748b;
+}
+
+.entrada-com-prefixo {
+  padding-left: 42px;
+}
+
+.grade-dupla {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+@media (max-width: 600px) {
+  .grade-dupla {
+    grid-template-columns: 1fr;
+  }
+}
+
+.mensagem-erro-campo {
+  margin-top: 5px;
+  color: #ef4444;
+  font-size: 12px;
+  font-weight: 500;
+}
+
+/* Painel de Prévia da Taxa */
+.painel-previa {
+  background: #f8fafc;
+  border: 1.5px dashed #93c5fd;
+  border-radius: 12px;
+  padding: 16px;
+  margin-bottom: 22px;
+}
+
+.previa-alerta {
+  border-color: #fca5a5;
+  background: #fff5f5;
+}
+
+.cabecalho-previa {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.rotulo-previa {
+  font-size: 13px;
+  font-weight: 700;
+  color: #1e40af;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.badge-dias {
+  background: #dbeafe;
+  color: #1e40af;
+  padding: 3px 10px;
+  border-radius: 20px;
+  font-size: 11px;
+  font-weight: 700;
+}
+
+.conteudo-previa {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.linha-previa {
+  display: flex;
+  justify-content: space-between;
+  font-size: 13px;
+  color: #475569;
+}
+
+.destaque-taxa {
+  color: #2563eb;
+  font-size: 14px;
+}
+
+.linha-total {
+  margin-top: 6px;
+  padding-top: 8px;
+  border-top: 1px solid #e2e8f0;
+  font-weight: 700;
+  color: #0f172a;
+}
+
+.destaque-total {
+  color: #059669;
+  font-size: 16px;
+}
+
+.aviso-bloqueio {
+  color: #dc2626;
+  font-size: 13px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.icone-aviso-inline {
+  font-size: 18px;
+  color: #dc2626;
+}
+
+.botao-agendar {
+  width: 100%;
+  padding: 14px;
+  border: none;
+  border-radius: 10px;
+  background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
+  color: #ffffff;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  box-shadow: 0 4px 12px rgba(37, 99, 235, 0.25);
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.botao-agendar:hover:not(:disabled) {
+  transform: translateY(-1px);
+  box-shadow: 0 6px 16px rgba(37, 99, 235, 0.35);
+  background: linear-gradient(135deg, #1d4ed8 0%, #1e40af 100%);
+}
+
+.botao-agendar:disabled {
+  background: #cbd5e1;
+  color: #94a3b8;
+  cursor: not-allowed;
+  box-shadow: none;
+  transform: none;
+}
+
+.indicador-carregamento {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.circulo-giratorio {
+  width: 16px;
+  height: 16px;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  border-top-color: #ffffff;
+  border-radius: 50%;
+  animation: girar 0.7s linear infinite;
+}
+
+@keyframes girar {
+  to {
+    transform: rotate(360deg);
+  }
+}

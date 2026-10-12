@@ -1,0 +1,173 @@
+.aplicacao-conteiner {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background-color: #f1f5f9;
+}
+
+/* Barra de Navegação */
+.barra-navegacao {
+  background: #0f172a;
+  color: #ffffff;
+  padding: 16px 24px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.12);
+}
+
+.conteudo-navegacao {
+  max-width: 1300px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logotipo-marca {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.simbolo-logo {
+  background: rgba(56, 189, 248, 0.15);
+  color: #38bdf8;
+  width: 46px;
+  height: 46px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.simbolo-logo-icone {
+  font-size: 26px;
+}
+
+.nome-sistema {
+  margin: 0;
+  font-size: 19px;
+  font-weight: 700;
+  letter-spacing: -0.3px;
+}
+
+.subtitulo-sistema {
+  font-size: 12px;
+  color: #94a3b8;
+}
+
+.data-sistema {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  background: rgba(255, 255, 255, 0.08);
+  padding: 8px 16px;
+  border-radius: 20px;
+  border: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.icone-data {
+  font-size: 16px;
+  color: #38bdf8;
+}
+
+.texto-data {
+  color: #cbd5e1;
+  font-weight: 500;
+}
+
+/* Conteúdo Principal */
+.conteudo-principal {
+  flex: 1;
+  max-width: 1300px;
+  width: 100%;
+  margin: 28px auto;
+  padding: 0 20px;
+  box-sizing: border-box;
+}
+
+/* Grade de Layout */
+.grade-aplicacao {
+  display: grid;
+  grid-template-columns: 460px 1fr;
+  gap: 28px;
+  align-items: start;
+}
+
+@media (max-width: 1024px) {
+  .grade-aplicacao {
+    grid-template-columns: 1fr;
+  }
+}
+
+.coluna-formulario {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+/* Cartão de Regras de Taxas */
+.cartao-regras-taxas {
+  background: #ffffff;
+  border-radius: 16px;
+  padding: 22px;
+  border: 1px solid #e2e8f0;
+  box-shadow: 0 4px 14px rgba(15, 23, 42, 0.04);
+}
+
+.cabecalho-regras {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 14px;
+}
+
+.icone-regras {
+  font-size: 20px;
+  color: #2563eb;
+}
+
+.titulo-regras {
+  margin: 0;
+  font-size: 15px;
+  font-weight: 700;
+  color: #1e293b;
+}
+
+.tabela-regras {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 12px;
+}
+
+.tabela-regras th {
+  background: #f8fafc;
+  color: #475569;
+  text-align: left;
+  padding: 8px 10px;
+  border-bottom: 1px solid #e2e8f0;
+  font-weight: 600;
+}
+
+.tabela-regras td {
+  padding: 8px 10px;
+  border-bottom: 1px solid #f1f5f9;
+  color: #334155;
+}
+
+.nota-regras {
+  margin: 12px 0 0 0;
+  font-size: 11px;
+  color: #dc2626;
+  font-style: italic;
+}
+
+/* Rodapé */
+.rodape-aplicacao {
+  background: #ffffff;
+  border-top: 1px solid #e2e8f0;
+  padding: 16px;
+  text-align: center;
+  font-size: 12px;
+  color: #64748b;
+  margin-top: 40px;
+}

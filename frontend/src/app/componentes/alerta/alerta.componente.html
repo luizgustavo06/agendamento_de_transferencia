@@ -1,0 +1,20 @@
+<div *ngIf="alerta" class="caixa-alerta" [ngClass]="'alerta-' + alerta.tipo" role="alert">
+  <div class="icone-alerta">
+    <span class="material-symbols-outlined" *ngIf="alerta.tipo === 'sucesso'">check_circle</span>
+    <span class="material-symbols-outlined" *ngIf="alerta.tipo === 'aviso'">warning</span>
+    <span class="material-symbols-outlined" *ngIf="alerta.tipo === 'erro'">error</span>
+    <span class="material-symbols-outlined" *ngIf="alerta.tipo === 'info'">info</span>
+  </div>
+
+  <div class="conteudo-alerta">
+    <h4 class="titulo-alerta">{{ alerta.titulo }}</h4>
+    <p class="mensagem-alerta">{{ alerta.mensagem }}</p>
+    <ul *ngIf="alerta.detalhes && alerta.detalhes.length > 0" class="lista-detalhes">
+      <li *ngFor="let detalhe of alerta.detalhes">{{ detalhe }}</li>
+    </ul>
+  </div>
+
+  <button type="button" class="botao-fechar" (click)="fecharAlerta()" aria-label="Fechar notificação">
+    <span class="material-symbols-outlined">close</span>
+  </button>
+</div>
